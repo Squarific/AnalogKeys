@@ -2,6 +2,8 @@
 	AnalogKeys example file - Library for analog key managment for lcds (designed for LCD Keypad Shield V2.0)
 	Created by Filip Smets, 22/05/2014.
 	Released into the public domain.
+
+        Note: Before you start using this library, make sure you understand how the lcd works!
 */
 
 #include <LiquidCrystal.h>
@@ -32,6 +34,9 @@ AnalogKeys analogKeys(&lcd, INPUTPIN, keys, KEYSLENGTH, analogValues);
 boolean needsCalibration = true;
 
 void setup () {
+  lcd.begin(16, 2);
+  lcd.clear();
+  lcd.print("Calibrating keys...");
   needsCalibration = true;
 }
 
