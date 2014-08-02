@@ -27,7 +27,9 @@ LiquidCrystal lcd(rs, enable, d4, d5, d6, d7);
 #define INPUTPIN 0
 
 char* keys [] = {"NONE", "LEFT", "RIGHT", "UP", "DOWN", "SELECT"};
-int analogValues [KEYSLENGTH] = {};
+int analogValues [KEYSLENGTH] = {}; // If you know the values of the keys you can already pass them, that way you don't have to calibrate
+// Example with preprogrammed analog values:
+// int analogValues [] = {675, 314, 0, 85, 475};
 
 AnalogKeys analogKeys(&lcd, INPUTPIN, keys, KEYSLENGTH, analogValues);
 
