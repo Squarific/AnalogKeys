@@ -8,7 +8,7 @@
 #include "AnalogKeys.h"
 #include "LiquidCrystal.h"
 
-AnalogKeys::AnalogKeys(LiquidCrystal lcd, int pin, char* keylist, int keylistLength, int analogValues) {
+AnalogKeys::AnalogKeys(LiquidCrystal *lcd, int pin, char* keylist [], int keylistLength, int analogValues []) {
 	_lcd = lcd;
 	_pin = pin;
 	_keylist = keylist;
@@ -33,27 +33,27 @@ char* AnalogKeys::getPressedKey() {
             }
         }
     }
-    return currentKey;
+    return _keylist[currentKey];
 }
 
-void AnalogKeys::calibrateKeys (tryAmount, timePerKey) {
+void AnalogKeys::calibrateKeys (int tryAmount, int timePerKey) {
 	int calsleep = timePerKey / tryAmount;
 	for (int key = 0; key < _keylistLength; key++) {
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Calibrating keys");
-        lcd.setCursor(0, 1);
-        lcd.print("Press key ");
-        lcd.print(_keylist[key]);
+        _lcd->clear();
+        _lcd->setCursor(0, 0);
+        _lcd->print("Calibrating keys");
+        _lcd->setCursor(0, 1);
+        _lcd->print("Press key ");
+        _lcd->print(_keylist[key]);
         delay(1000);
         long average = 0;
         for (int tries = 0; tries < tryAmount; tries++) {
-            lcd.clear();
-            lcd.setCursor(0, 0);
-            lcd.print("Calibrating keys");
-            lcd.setCursor(0, 1);
+            _lcd->clear();
+            _lcd->setCursor(0, 0);
+            _lcd->print("Calibrating keys");
+            _lcd->setCursor(0, 1);
             int currentKeyValue = analogRead(_pin);
-            lcd.print(currentKeyValue);
+            _lcd->print(currentKeyValue);
             average += currentKeyValue;
             delay(calsleep);
         }

@@ -12,15 +12,15 @@
 
 class AnalogKeys {
 	public:
-		AnalogKeys(LiquidCrystal lcd, int pin, char* keylist, int keylistLength, int analogValues);
+		AnalogKeys(LiquidCrystal *lcd, int pin, char* keylist [], int keylistLength, int analogValues []);
 		char* getPressedKey();
-		void calibrateKeys();
+		void calibrateKeys(int, int);
 	private:
-		LiquidCrystal _lcd;
-		char* _keylist;
+		LiquidCrystal *_lcd;
+		char** _keylist;
 		int _pin;
 		int _keylistLength;
-		int _analogValues;
+		int* _analogValues;
 };
 
 #endif
